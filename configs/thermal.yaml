@@ -1,5 +1,6 @@
 train: ../data/thermal/images/train
 val: ../data/thermal/images/val
+test: ../data/thermal/images/test
 
 names:
   0: person
