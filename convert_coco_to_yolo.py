@@ -54,7 +54,7 @@ def convert(image_dir, labels_out_dir):
 
 
 if __name__ == '__main__':
-    convert('data/images_thermal_train', 'data/labels_thermal_train')
-    convert('data/images_thermal_val', 'data/labels_thermal_val')
-    convert('data/images_rgb_train', 'data/labels_rgb_train')
-    convert('data/images_rgb_val', 'data/labels_rgb_val')
+    convert('data/leftovers/images_thermal_train', 'data/thermal/labels/train')
+    convert('data/leftovers/images_thermal_val', 'data/thermal/labels/val')
+    convert('data/leftovers/images_rgb_train', 'data/rgb/labels/train')
+    convert('data/leftovers/images_rgb_val', 'data/rgb/labels/val')
