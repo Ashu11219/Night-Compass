@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NightCompass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="/">
+      <svg class="wordmark-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M16 6 L20 16 L16 26 L12 16 Z" fill="currentColor"/>
+      </svg>
+      NightCompass
+    </a>
+
+    <nav class="modes" role="tablist" aria-label="Detection mode">
+      <button class="mode" role="tab" id="tab-image" aria-controls="panel-image" aria-selected="true">Image</button>
+      <button class="mode" role="tab" id="tab-video" aria-controls="panel-video" aria-selected="false">Video</button>
+    </nav>
+
+    <div class="theme">
+      <span class="theme-label" id="theme-label">Dark mode</span>
+      <button class="switch" id="theme-toggle" role="switch" aria-checked="false" aria-labelledby="theme-label"></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Image detection -->
+    <section class="workspace" id="panel-image" role="tabpanel" aria-labelledby="tab-image">
+      <div class="controls">
+        <h1>Image detection</h1>
+        <p class="intro">Upload a thermal or RGB frame and get it back with every detected object boxed and labelled.</p>
+
+        <label class="dropzone" id="image-zone">
+          <input type="file" id="image-input" accept="image/*">
+          <span class="dropzone-title">Drop an image here</span>
+          <span class="dropzone-hint">or click to browse. JPG or PNG.</span>
+          <span class="dropzone-file" id="image-file-name"></span>
+        </label>
+
+        <button class="btn-primary" id="image-run" disabled>Detect objects</button>
+        <p class="status" id="image-status" role="status" aria-live="polite"></p>
+        <div class="results" id="image-results"></div>
+      </div>
+
+      <figure class="viewfinder">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+        <img id="image-view" alt="Detection result" hidden>
+        <figcaption class="viewfinder-empty" id="image-empty">The annotated image shows up here.</figcaption>
+      </figure>
+    </section>
+
+    <!-- Video detection -->
+    <section class="workspace" id="panel-video" role="tabpanel" aria-labelledby="tab-video" hidden>
+      <div class="controls">
+        <h1>Video detection</h1>
+        <p class="intro">Upload a clip and watch detections run frame by frame, with proximity alerts drawn on the feed.</p>
+
+        <label class="dropzone" id="video-zone">
+          <input type="file" id="video-input" accept="video/*">
+          <span class="dropzone-title">Drop a video here</span>
+          <span class="dropzone-hint">or click to browse. MP4 works best.</span>
+          <span class="dropzone-file" id="video-file-name"></span>
+        </label>
+
+        <button class="btn-primary" id="video-run" disabled>Start detection</button>
+        <button class="btn-secondary" id="video-stop" hidden>Stop feed</button>
+        <p class="status" id="video-status" role="status" aria-live="polite"></p>
+      </div>
+
+      <figure class="viewfinder">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+        <span class="live" id="video-live" hidden>Live</span>
+        <img id="video-view" alt="Live detection feed" hidden>
+        <figcaption class="viewfinder-empty" id="video-empty">The live feed plays here once detection starts.</figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

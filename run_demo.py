@@ -24,18 +24,21 @@ def get_detections(model, frame):
 
 def draw_detections(frame, detections):
     h, w = frame.shape[:2]
+    scale = max(h / 720, 0.6)
+    thickness = max(int(2 * scale), 2)
+
     for class_name, confidence, (x_center, y_center, box_w, box_h) in detections:
         x1 = int((x_center - box_w / 2) * w)
         y1 = int((y_center - box_h / 2) * h)
         x2 = int((x_center + box_w / 2) * w)
         y2 = int((y_center + box_h / 2) * h)
 
-        cv2.rectangle(frame, (x1, y1), (x2, y2), YELLOW, 2)
+        cv2.rectangle(frame, (x1, y1), (x2, y2), YELLOW, thickness)
 
         if confidence >= LABEL_CONFIDENCE_THRESHOLD:
             label = f"{class_name} {confidence:.2f}"
-            cv2.putText(frame, label, (x1, max(y1 - 10, 0)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 1.0, EMERALD_GREEN, 2)
+            cv2.putText(frame, label, (x1, max(y1 - int(10 * scale), 0)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1.0 * scale, EMERALD_GREEN, thickness)
     return frame
 
 
@@ -51,17 +54,20 @@ def process_frame(frame, thermal_model, rgb_model):
         chosen_dets, source = rgb_dets, 'RGB'
 
     annotated = draw_detections(frame.copy(), chosen_dets)
+    h = annotated.shape[0]
+    scale = max(h / 720, 0.6)
+    thickness = max(int(2 * scale), 2)
 
     if chosen_dets:
-        cv2.putText(annotated, f"Source: {source}", (20, 30),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+        cv2.putText(annotated, f"Source: {source}", (20, int(30 * scale)),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.8 * scale, (0, 255, 0), thickness)
     else:
         source = None
 
     alerts = should_alert(chosen_dets)
     for i, alert in enumerate(alerts):
         cv2.putText(annotated, f"ALERT: {alert['class']} {alert['direction']}",
-                    (20, 65 + i * 35), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255), 2)
+                    (20, int((65 + i * 35) * scale)), cv2.FONT_HERSHEY_SIMPLEX, 0.8 * scale, (0, 0, 255), thickness)
 
     return annotated, chosen_dets, source, alerts
 

@@ -23,7 +23,6 @@ rgb_model = YOLO(RGB_MODEL_PATH)
 UPLOAD_DIR = 'uploads'
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-# Frontend files (index.html, style.css, script.js) live in static/
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
