@@ -11,18 +11,18 @@ def estimate_proximity(box):
 def estimate_direction(box):
     x_center, _, _, _ = box
     if x_center < 0.35:
-        return 'left'
+        return "left"
     elif x_center > 0.65:
-        return 'right'
-    return 'center'
+        return "right"
+    return "center"
 
 def should_alert(detections):
     alerts = []
     for class_name, confidence, box in detections:
         proximity = estimate_proximity(box)
         direction = estimate_direction(box)
-        if proximity == 'close':
-            alerts.append({'class': class_name, 'direction': direction, 'proximity': proximity})
+        if proximity == "close":
+            alerts.append({"class": class_name, "direction": direction, "proximity": proximity})
     return alerts
 
 '''
@@ -48,14 +48,14 @@ classes with consistent size (e.g. "person").
 FOCAL_LENGTH_PX = 700  # placeholder, replace with real camera's calibrated value
 
 AVERAGE_REAL_HEIGHTS = {
-    'person': 1.7,
-    'bike': 1.1,
-    'car': 1.5,
-    'bus': 3.0,
-    'truck': 2.5,
-    'light': 3.0,     # traffic light pole height, rough
-    'hydrant': 0.75,
-    'sign': 2.0,       # highly variable, least reliable estimate
+    "person": 1.7,
+    "bike": 1.1,
+    "car": 1.5,
+    "bus": 3.0,
+    "truck": 2.5,
+    "light": 3.0,     # traffic light pole height, rough
+    "hydrant": 0.75,
+    "sign": 2.0,       # highly variable, least reliable estimate
 }
 
 def estimate_distance_meters(class_name, box, frame_height_px):

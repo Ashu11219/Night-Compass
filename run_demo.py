@@ -3,8 +3,8 @@ import cv2
 from ultralytics import YOLO
 from alert_logic import should_alert
 
-THERMAL_MODEL_PATH = 'runs/detect/thermal_full/weights/best.pt'
-RGB_MODEL_PATH = 'runs/detect/rgb_full/weights/best.pt'
+THERMAL_MODEL_PATH = "weights/thermal.pt"
+RGB_MODEL_PATH = "weights/rgb.pt"
 
 LABEL_CONFIDENCE_THRESHOLD = 0.3  # below this, box shows but no class/confidence text
 
@@ -49,9 +49,9 @@ def process_frame(frame, thermal_model, rgb_model):
     rgb_dets, rgb_conf = get_detections(rgb_model, frame)
 
     if thermal_conf >= rgb_conf:
-        chosen_dets, source = thermal_dets, 'THERMAL'
+        chosen_dets, source = thermal_dets, "THERMAL"
     else:
-        chosen_dets, source = rgb_dets, 'RGB'
+        chosen_dets, source = rgb_dets, "RGB"
 
     annotated = draw_detections(frame.copy(), chosen_dets)
     h = annotated.shape[0]
@@ -85,7 +85,7 @@ def run_on_video(video_path):
 
         annotated_frame, _, _, _ = process_frame(frame, thermal_model, rgb_model)
 
-        cv2.imshow('NightCompass Demo', annotated_frame)
+        cv2.imshow("NightCompass Demo", annotated_frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
@@ -93,5 +93,5 @@ def run_on_video(video_path):
     cv2.destroyAllWindows()
 
 
-if __name__ == '__main__':
-    run_on_video('data/video_thermal_test/sample.mp4')
+if __name__ == "__main__":
+    run_on_video("data/videos/human_night.mp4.mp4")

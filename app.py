@@ -20,7 +20,7 @@ app = FastAPI(title="NightCompass API")
 thermal_model = YOLO(THERMAL_MODEL_PATH)
 rgb_model = YOLO(RGB_MODEL_PATH)
 
-UPLOAD_DIR = 'uploads'
+UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -46,10 +46,10 @@ async def detect_image(file: UploadFile = File(...)):
 
     annotated, detections, source, alerts = process_frame(frame, thermal_model, rgb_model)
 
-    _, buffer = cv2.imencode('.jpg', annotated)
+    _, buffer = cv2.imencode(".jpg", annotated)
 
     return {
-        "image": base64.b64encode(buffer).decode('utf-8'),
+        "image": base64.b64encode(buffer).decode("utf-8"),
         "source": source,
         "alerts": alerts,
         "detections": [
@@ -82,7 +82,7 @@ def generate_frames(path):
                 break
 
             annotated, _, _, _ = process_frame(frame, thermal_model, rgb_model)
-            _, buffer = cv2.imencode('.jpg', annotated)
+            _, buffer = cv2.imencode(".jpg", annotated)
 
             yield (b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + buffer.tobytes() + b"\r\n")
 
