@@ -15,7 +15,7 @@ def count_instances(coco_path):
     for cat_id, count in counts.most_common():
         print(f"  {id_to_name[cat_id]}: {count}")
 
-count_instances('data/images_rgb_train/coco.json')
-count_instances('data/images_rgb_val/coco.json')
-count_instances('data/images_thermal_train/coco.json')
-count_instances('data/images_thermal_val/coco.json')
+count_instances('data/leftovers/images_rgb_train/coco.json')
+count_instances('data/leftovers/images_rgb_val/coco.json')
+count_instances('data/leftovers/images_thermal_train/coco.json')
+count_instances('data/leftovers/images_thermal_val/coco.json')
