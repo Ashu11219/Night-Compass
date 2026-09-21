@@ -12,4 +12,4 @@ def main(path):
     run_on_video(path)
 
 if __name__ == "__main__":
-    main("data/videos/car.mp4")
+    main("data/videos/human_night.mp4.mp4")
