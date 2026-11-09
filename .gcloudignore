@@ -1,0 +1,11 @@
+.git
+.gitignore
+__pycache__/
+*.pyc
+venv/
+.venv/
+data/
+runs/
+uploads/
+yolo26n.pt
+yolov8n.pt
