@@ -12,9 +12,9 @@ A night-time obstacle detection system for blind pedestrians, built on thermal a
 ## 🌐 Live Demo
 
 👉 **Try it here:**
-https://night-compass.onrender.com/
+https://nightcompass-132701192647.us-central1.run.app/
 
-> Hosted on Render's free tier. The first visit after a period of inactivity takes 30 to 60 seconds while the server wakes up. Video detection runs on a shared CPU there, so the live feed is painstakingly slower than on a local GPU; image detection works at normal speed.
+> Runs on a free CPU server, so video detection is slow. Image mode is instant.
 
 ---
 
